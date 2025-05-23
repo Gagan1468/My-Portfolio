@@ -1,0 +1,190 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Portfolio - Gagan</title>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f9f9f9;
+      color: #333;
+    }
+    header {
+      background: #2c3e50;
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 3rem;
+    }
+    header p {
+      font-size: 1.2rem;
+      margin-top: 10px;
+    }
+    nav {
+      background: #ecf0f1;
+      padding: 15px;
+      text-align: center;
+    }
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+      color: #2c3e50;
+    }
+    section {
+      padding: 40px 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: #2c3e50;
+    }
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .project-card {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .project-card img {
+      width: 100%;
+      border-radius: 8px;
+    }
+    .project-card h3 {
+      margin-top: 15px;
+      font-size: 1.2rem;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+    input, textarea {
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+    button {
+      padding: 10px;
+      background: #3498db;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    a.button {
+      display: inline-block;
+      padding: 10px 20px;
+      margin: 5px 0;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+    }
+    .view-btn { background: #3498db; color: white; }
+    .download-btn { background: #2ecc71; color: white; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Gagan</h1>
+    <p>Web Developer | Designer | Learner</p>
+  </header>
+
+
+  <section>
+    <h2>About Me</h2>
+    <p>
+      I'm a passionate web developer with experience in front-end and back-end technologies.
+      I love building responsive, clean, and user-friendly websites and apps.
+    </p>
+  </section>
+
+
+  <section>
+    <h2>Projects</h2>
+    <div class="project-card">
+      <h3>Live Weather App</h3>
+      <p>Get real-time weather for any city using OpenWeatherMap API.</p>
+
+      <input type="text" id="cityInput" placeholder="Enter city name" style="width: 100%; padding: 10px; margin-bottom: 10px;" />
+      <button onclick="getWeather()" style="padding: 10px 20px;">Get Weather</button>
+
+      <div id="weatherResult" style="margin-top: 20px;"></div>
+
+      <script>
+        async function getWeather() {
+          const city = document.getElementById("cityInput").value;
+          const apiKey = "520ea731f09131ed2c6a0a8547e5cfff";
+          const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+
+          try {
+            const response = await fetch(url);
+            if (!response.ok) throw new Error("City not found");
+
+            const data = await response.json();
+            document.getElementById("weatherResult").innerHTML = `
+              <h4>${data.name}, ${data.sys.country}</h4>
+              <p><strong>Temperature:</strong> ${data.main.temp}°C</p>
+              <p><strong>Condition:</strong> ${data.weather[0].main}</p>
+            `;
+          } catch (error) {
+            document.getElementById("weatherResult").innerHTML = `<p style="color:red;">${error.message}</p>`;
+          }
+        }
+      </script>
+    </div>
+
+    <div class="project-card">
+      <img src="https://res.cloudinary.com/proxify-io/image/upload/c_fit,f_auto,q_auto,dpr_auto,w_900/v1/cms/images/gallery/xizwtpiwqewW9qZVGgeXy5Ee0kOc8MAHrkFwEXtm.png" alt="Project 2" />
+      <h3>To do List</h3>
+      <p>A simple todo list app with localStorage support.</p>
+      <a href="todo.html">View To Do List</a>
+    </div>
+
+    <div class="project-card">
+  <img src="https://marketplace.canva.com/EAFswsvyoPw/1/0/1131w/canva-pastel-colors-modern-minimal-portfolio-cover-page-a4-document-Ina0HeyTFUk.jpg" alt="Portfolio Cover" />
+  <h3>Portfolio Site</h3>
+  <p>Responsive portfolio site built with HTML/CSS.</p>
+  <!-- Link ko update kiya, jo ek alag portfolio.html page kholega -->
+  <a href="portfolio.html" target="_blank">View Portfolio</a>
+</div>
+
+<div class="project-card">
+      <img src="https://media.geeksforgeeks.org/wp-content/uploads/20240703163709/Frontend-Development-Courses.webp" alt="Project 2" />
+      <h3>Front End Course video</h3>
+      <p>A simple todo list app with localStorage support.</p>
+      <a href="video.html">View video</a>
+    </div>
+
+
+  </section>
+
+  <section>
+    <h2>Contact Me</h2>
+    <form action="https://formspree.io/f/xbloepwa" method="POST">
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="_replyto" placeholder="Your Email" required />
+      <textarea name="message" rows="5" placeholder="Your Message..." required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+</body>
+</html>
